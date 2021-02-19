@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Spencer's Booklist";
+}
+
+@model IQueryable<Booklist>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!--TITLE-->
+    <title class="text-center">Spencer's Bookstore</title>
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+
+<body>
+    <header>
+        <!--TITLE-->
+        <div class="text-center">
+            <h2 class="bg-primary text-white text-center">Spencer's Bookstore</h2>
+        </div>
+    </header>
+    <br />
+    <br />
+
+    <!--IMAGE-->
+    <div class="text-center">
+        <a> <img src="img/books.jpeg" class="rounded" /> </a>
+        <br /><br />
+    </div>
+
+    <h2>Spencer's Book Recommendations</h2>
+
+
+    <!--TABLE-->
+    <table>
+        <tr>
+            <!--TABLE HEADERS-->
+            <th>Title</th>
+            <th>Author's Name</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+            <th>Category</th>
+            <th>Price</th>
+        </tr>
+
+        <!--INSERT DATA INTO TABLE THROUGH LOOP-->
+        @foreach (var i in Model)
+         {
+    <tr>
+        <td>@i.BookTitle</td>
+        <td>@i.AuthorFirst @i.AuthorLast</td>
+        <td>@i.Publisher</td>
+        <td>@i.ISBN</td>
+        <td>@i.Classification, @i.Category</td>
+        <td>$@i.Price</td>
+
+    </tr>
+
+         }
+               
+        </table>
+
+
+
+</body>
+
+</html>
