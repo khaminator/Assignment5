@@ -43,32 +43,55 @@ namespace Assignment5Webpage
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsEnvironment("Development"))
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
+            if (env.IsEnvironment("Development"))
+            {
+                  app.UseDeveloperExceptionPage();
+            }
+            else
+            {
                 //Add Error Page
-            //}
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
 
-            app.UseDeveloperExceptionPage(); //Get info when error with website
+            app.UseHttpsRedirection();
 
-            app.UseNodeModules();
+            //app.UseDeveloperExceptionPage(); //Get info when error with website
+
+            //app.UseNodeModules();
             //app.UseDefaultFiles(); Not using this when it's with JQuery
-            app.UseStaticFiles(); //This will run the html files because they are static
+            //This will run the html files because they are static
             //UseStaticFiles and making a public root folder didn't work for me.
+
+            app.UseStaticFiles();
 
             app.UseRouting(); //Route the info a certain way
 
-            app.UseEndpoints(cfg =>
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                cfg.MapControllerRoute("Default",
-                    "{controller}/{action}/{id?}",
-                    new { controller = "Home", action = "Index" });  //Route it based on endpoints, use this controller and this action
+                //Change the page number URL to be /P1 /P2 /P3
+                endpoints.MapControllerRoute(
+                    "pagination",
+                    "P{page}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapDefaultControllerRoute();
+
             }
 
             );
+
+            //This connects to the SeedData.cs page.
+            //To add more to the seed data use this command in terminal:
+            // dotnet ef database drop --force --context BookDbContext
+
+            //To run a migration:
+            // dotnet ef migrations add Initial
+
+            //To delete a mirgration:
+            // dotnet ef migrations remove
 
             SeedData.EnsurePopulated(app);
 

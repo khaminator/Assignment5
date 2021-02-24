@@ -37,6 +37,8 @@ namespace Assignment5Webpage.Models //change the namespace to Assignment5?
 
         [Required]
         public double Price { get; set; }
+
+        public int PageNum { get; set;}
            
     }
 }

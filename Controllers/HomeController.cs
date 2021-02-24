@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using System.Linq; //This is like SQL, used for querying.
 using System.Threading.Tasks;
 using Assignment5Webpage.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Assignment5Webpage.Models.ViewModels;
 
 namespace Assignment5Webpage.Controllers
 {
@@ -16,6 +17,9 @@ namespace Assignment5Webpage.Controllers
         //Add the repository from the DB to the controller and pass into controller.
         private iBookRepository _repository;
 
+        //Variable to hold the items per page
+        public int ItemsPerPage = 5;
+
         public HomeController(ILogger<HomeController> logger, iBookRepository repository)
         {
             _logger = logger;
@@ -23,9 +27,26 @@ namespace Assignment5Webpage.Controllers
         }
 
         //INDEX VIEW, Insert the data from the DB.
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View(_repository.Booklists);
+            //Tells program which pages and items to grab.
+            return View(new ProjectListViewModel
+            {
+                Booklists = _repository.Booklists
+                        .OrderBy(b => b.BookID)
+                        .Skip((page - 1) * ItemsPerPage)
+                        .Take(ItemsPerPage)
+                    ,
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = ItemsPerPage, //maybe change name to PageAmt to differentiate
+                    TotalNumItems = _repository.Booklists.Count()
+
+                }
+
+            });
+               
         }
 
         public IActionResult Create()

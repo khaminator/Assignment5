@@ -1,69 +1,86 @@
 ﻿@{
-    ViewData["Title"] = "Spencer's Booklist";
+    ViewData["Title"] = "Spencer's Bookstore";
+    ViewData["SubTitle"] = "A Literary Emporium";
 }
 
-@model IQueryable<Booklist>
+<!--Take out the IQueryable Model-->
+@model ProjectListViewModel 
 
 <!DOCTYPE html>
 <html>
 
 <head>
 
-    <!--TITLE-->
-    <title class="text-center">Spencer's Bookstore</title>
-    <meta name="viewport" content="width=device-width" />
-
 </head>
 
 <body>
-    <header>
-        <!--TITLE-->
-        <div class="text-center">
-            <h2 class="bg-primary text-white text-center">Spencer's Bookstore</h2>
-        </div>
-    </header>
+
     <br />
     <br />
 
     <!--IMAGE-->
-    <div class="text-center">
-        <a> <img src="img/books.jpeg" class="rounded" /> </a>
-        <br /><br />
+    <!--# 1 BOOTSTRAP IMPLEMENTED: SHADOWING-->
+    <!--# 2 BOOTSTRAP IMPLEMENTED: CONTAINER PADDED BOX-->
+    <div class="container">
+        <div class="text-center shadow-lg p-3 mb-5 bg-white rounded">
+            <a> <img src="img/books.jpeg" class="rounded" /> </a>
+            <div class="overlay"></div>
+            <br /><br />
+        </div>
     </div>
+    <br />
+    <div class="row p-3">
+        <div class="col-2">
 
-    <h2>Spencer's Book Recommendations</h2>
+            
+            <!--# 3 BOOTSTRAP IMPLEMENTED: HIGHLIGHTS-->
+            <h3 class="h3-responsive"><mark>Spencer's Top Picks</mark></h3>
+        </div>
+   
+    <div class="col-10">
+
+        <!--TABLE-->
+        <table>
+            <tr>
+                <!--TABLE HEADERS-->
+                <th class="font-weight-bold">Pick</th>
+                <th class="font-weight-bold">Title</th>
+                <th class="font-weight-bold">Author's Name</th>
+                <th class="font-weight-bold">Publisher</th>
+                <th class="font-weight-bold">ISBN</th>
+                <th class="font-weight-bold">Category</th>
+                <th class="font-weight-bold">Page Number</th>
+                <th class="font-weight-bold">Price</th>
 
 
-    <!--TABLE-->
-    <table>
-        <tr>
-            <!--TABLE HEADERS-->
-            <th>Title</th>
-            <th>Author's Name</th>
-            <th>Publisher</th>
-            <th>ISBN</th>
-            <th>Category</th>
-            <th>Price</th>
-        </tr>
+            </tr>
 
-        <!--INSERT DATA INTO TABLE THROUGH LOOP-->
-        @foreach (var i in Model)
-         {
-    <tr>
-        <td>@i.BookTitle</td>
-        <td>@i.AuthorFirst @i.AuthorLast</td>
-        <td>@i.Publisher</td>
-        <td>@i.ISBN</td>
-        <td>@i.Classification, @i.Category</td>
-        <td>$@i.Price</td>
+            <!--INSERT DATA INTO TABLE THROUGH LOOP-->
+            @foreach (var i in Model.Booklists)
+            {
+                <tr>
+                    <td class="font-weight-bold">@i.BookID</td>
+                    <td><mark>@i.BookTitle</mark></td>
+                    <td>@i.AuthorFirst @i.AuthorLast</td>
+                    <td>@i.Publisher</td>
+                    <td>@i.ISBN</td>
+                    <td>@i.Classification, @i.Category</td>
+                    <td>@i.PageNum</td>
+                    <td class="badge badge-pill badge-dark">$@i.Price</td>
 
-    </tr>
 
-         }
-               
+                </tr>
+
+            }
+
         </table>
 
+    </div>
 
+        <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+             page-class-normal="btn-outline-dark"
+             page-class-selected="btn-primary"
+             clss="btn-group pull-right m-2"></div>
 
 </body>
 

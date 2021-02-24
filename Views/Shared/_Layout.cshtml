@@ -4,29 +4,41 @@
 <head>
     <title>Spencer's Bookstore</title>
     <meta name="viewport" content="width=device-width" />
+    <!--Connect Bootstrap-->
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/main.css" rel="stylesheet" />
 
-   
 </head>
 <body>
-    <!-- <div class="text-center">
-         <h1>@ViewBag.Title</h1>
-     </div>
 
+    <!--TITLE-->
+    <div class="bg-dark text-white text-center p-2">
+        <h1>@ViewBag.Title</h1>
+    </div>
+
+    <!--SUBTITLE-->
+    <div class="text-center">
+        <h3 class="bg-dark text-white text-center">@ViewBag.Subtitle</h3>
+    </div>
+
+    <!--NAVIGATION
      <div class="topnav">
          <a class="active" asp-controller="Home" asp-action="Index">Home</a>
          <a asp-controller="Home" asp-action="ResturantList">Submit Your Favorite Resturant</a>
 
      </div>
         -->
+
     <div>
-        @RenderBody()
+       @RenderBody()
     </div>
+    
 
     <br />
     <br />
     <br />
+
+    <!--FOOTER-->
     <footer>
         Spencer's Bookstore &copy; 2021
     </footer>

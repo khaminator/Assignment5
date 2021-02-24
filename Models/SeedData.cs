@@ -37,6 +37,7 @@ namespace Assignment5Webpage.Models
                         Classification = "Fiction",
                         Category = "Classic ",
                         Price = 9.95,
+                        PageNum = 1488,
                     },
 
                     new Booklist
@@ -50,6 +51,7 @@ namespace Assignment5Webpage.Models
                         Classification = "Non-Fiction",
                         Category = "Biography",
                         Price = 14.58,
+                        PageNum = 944,
                     },
 
                      new Booklist
@@ -63,6 +65,7 @@ namespace Assignment5Webpage.Models
                          Classification = "Non-Fiction",
                          Category = "Biography",
                          Price = 21.54,
+                         PageNum = 832,
 
                      },
 
@@ -77,6 +80,7 @@ namespace Assignment5Webpage.Models
                           Classification = "Non-Fiction",
                           Category = "Biography",
                           Price = 11.61,
+                          PageNum = 864,
 
                       },
 
@@ -91,6 +95,7 @@ namespace Assignment5Webpage.Models
                            Classification = "Non-Fiction",
                            Category = "Historical",
                            Price = 13.33,
+                           PageNum = 528,
 
                        },
 
@@ -105,6 +110,7 @@ namespace Assignment5Webpage.Models
                            Classification = "Fiction",
                            Category = "Historical Fiction",
                            Price = 15.95,
+                           PageNum = 288,
 
                        },
 
@@ -119,6 +125,7 @@ namespace Assignment5Webpage.Models
                            Classification = "Non-Fiction",
                            Category = "Self-Help",
                            Price = 14.99,
+                           PageNum = 304,
 
                        },
 
@@ -133,6 +140,7 @@ namespace Assignment5Webpage.Models
                            Classification = "Non-Fiction",
                            Category = "Self-Help",
                            Price = 21.66,
+                           PageNum = 240,
 
                        },
 
@@ -147,6 +155,7 @@ namespace Assignment5Webpage.Models
                            Classification = "Non-Fiction",
                            Category = "Business ",
                            Price = 29.16,
+                           PageNum = 400,
 
                        },
 
@@ -161,8 +170,50 @@ namespace Assignment5Webpage.Models
                            Classification = "Fiction",
                            Category = "Thrillers ",
                            Price = 15.03,
+                           PageNum = 642,
 
+                       },
+
+                       
+                        new Booklist
+                        {
+                           BookTitle = "The Lobster Kings",
+                           AuthorFirst = "Alexi",
+                           AuthorLast = "Zentner",
+                           Publisher = "W.W. Norton & Company",
+                           ISBN = "978-0393351071",
+                           Classification = "Fiction",
+                           Category = "Thrillers",
+                           Price = 16.95,
+                           PageNum = 352,
+                       },
+
+                       new Booklist
+                        {
+                           BookTitle = "Into the Wild",
+                           AuthorFirst = "Jon",
+                           AuthorLast = "Krakauer",
+                           Publisher = "Villard",
+                           ISBN = "978-0330351690",
+                           Classification = "Non-Fiction",
+                           Category = "Historical",
+                           Price = 13.50,
+                           PageNum = 224,
+                       },
+
+                       new Booklist
+                        {
+                           BookTitle = "Barbarian Days: A Surfing Life",
+                           AuthorFirst = "William",
+                           AuthorLast = "Finnegan",
+                           Publisher = "Little, Brown Book Group",
+                           ISBN = "978-1594203473",
+                           Classification = "Non-Fiction",
+                           Category = "Memoir",
+                           Price = 15.19,
+                           PageNum = 464,
                        }
+                        
 
                     );
 
