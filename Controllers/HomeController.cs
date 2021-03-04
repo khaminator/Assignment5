@@ -27,12 +27,14 @@ namespace Assignment5Webpage.Controllers
         }
 
         //INDEX VIEW, Insert the data from the DB.
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string category, int page = 1)
         {
             //Tells program which pages and items to grab.
             return View(new ProjectListViewModel
             {
+                //Similar to SQL - doing a query. 
                 Booklists = _repository.Booklists
+                        .Where(b => category == null || b.Category == category)
                         .OrderBy(b => b.BookID)
                         .Skip((page - 1) * ItemsPerPage)
                         .Take(ItemsPerPage)
@@ -41,9 +43,14 @@ namespace Assignment5Webpage.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = ItemsPerPage, //maybe change name to PageAmt to differentiate
-                    TotalNumItems = _repository.Booklists.Count()
+                    TotalNumItems = category == null ?  _repository.Booklists.Count() :
+                        _repository.Booklists.Where(b => b.Category == category).Count()
 
-                }
+                },
+
+                CurrentCategory = category
+              
+
 
             });
                

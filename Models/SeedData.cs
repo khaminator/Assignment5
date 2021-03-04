@@ -35,7 +35,7 @@ namespace Assignment5Webpage.Models
                         Publisher = "Signet",
                         ISBN = "978-0451419439",
                         Classification = "Fiction",
-                        Category = "Classic ",
+                        Category = "Classic",
                         Price = 9.95,
                         PageNum = 1488,
                     },

@@ -32,9 +32,10 @@
     <div class="row p-3">
         <div class="col-2">
 
-            
+
             <!--# 3 BOOTSTRAP IMPLEMENTED: HIGHLIGHTS-->
             <h3 class="h3-responsive"><mark>Spencer's Top Picks</mark></h3>
+            <vc:navigation-menu />
         </div>
    
     <div class="col-10">
@@ -58,29 +59,21 @@
             <!--INSERT DATA INTO TABLE THROUGH LOOP-->
             @foreach (var i in Model.Booklists)
             {
-                <tr>
-                    <td class="font-weight-bold">@i.BookID</td>
-                    <td><mark>@i.BookTitle</mark></td>
-                    <td>@i.AuthorFirst @i.AuthorLast</td>
-                    <td>@i.Publisher</td>
-                    <td>@i.ISBN</td>
-                    <td>@i.Classification, @i.Category</td>
-                    <td>@i.PageNum</td>
-                    <td class="badge badge-pill badge-dark">$@i.Price</td>
-
-
-                </tr>
-
+                //Connect to the partial view to display
+                <partial name="BooklistSummary" model="i" />
             }
 
         </table>
 
     </div>
 
-        <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+        <!--This links to the PageLinkTagHelper to declare all of these-->
+        <div page-model="@Model.PagingInfo" page-action="Index"
+             page-classes-enabled="true" page-class="btn"
              page-class-normal="btn-outline-dark"
              page-class-selected="btn-primary"
-             clss="btn-group pull-right m-2"></div>
+             page-url-category="@Model.CurrentCategory"
+             class="btn-group pull-right m-2"></div>
 
 </body>
 

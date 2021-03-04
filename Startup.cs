@@ -71,12 +71,24 @@ namespace Assignment5Webpage
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("categorypage",
+                    "{category}/{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("page",
+                    "{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("category",
+                    "Books/{category}",
+                    new { Controller = "Home", action = "Index", page = 1 });
+
                 //Change the page number URL to be /P1 /P2 /P3
-                endpoints.MapControllerRoute(
-                    "pagination",
+                endpoints.MapControllerRoute("pagination",
                     "P{page}",
                     new { Controller = "Home", action = "Index" });
 
+                //Default endpoint - index
                 endpoints.MapDefaultControllerRoute();
 
             }
