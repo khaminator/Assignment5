@@ -7,6 +7,8 @@
     <!--Connect Bootstrap-->
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/main.css" rel="stylesheet" />
+    <!--FontAwesome-->
+    <script src="https://kit.fontawesome.com/cfcadfc0e5.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -21,7 +23,18 @@
         <h3 class="bg-dark text-white text-center">@ViewBag.Subtitle</h3>
     </div>
 
-    <!--NAVIGATION - 
+    <div class="bg-dark text-white p-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col navbar-brand"></div>
+                <div class="col-6 text-right">
+                    <vc:purchase-summary/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--NAVIGATION -
      <div class="topnav">
          <a class="active" asp-controller="Home" asp-action="Index">Home</a>
          <a asp-controller="Home" asp-action="ResturantList">Submit Your Favorite Resturant</a>
@@ -30,9 +43,9 @@
         -->
 
     <div>
-       @RenderBody()
+        @RenderBody()
     </div>
-    
+
 
     <br />
     <br />

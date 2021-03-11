@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Assignment5Webpage.Models;
 using Microsoft.EntityFrameworkCore;
+using Assignment5Webpage.Models;
+
 
 namespace Assignment5Webpage
 {
@@ -33,11 +34,19 @@ namespace Assignment5Webpage
             services.AddDbContext<BookDbContext>(options =>
 
             {
-                options.UseSqlServer(Configuration.GetConnectionString("BooklistConnection")); // Pass in Sql Server Connection info
-
+                //options.UseSqlServer(Configuration.GetConnectionString("BooklistConnection")); // Pass in Sql Server Connection info
+                options.UseSqlite(Configuration.GetConnectionString("BooklistConnection"));
             });
 
             services.AddScoped<iBookRepository, EFBookRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +72,11 @@ namespace Assignment5Webpage
             //This will run the html files because they are static
             //UseStaticFiles and making a public root folder didn't work for me.
 
+            app.UseStatusCodePages(); //added from book
+
             app.UseStaticFiles();
+
+            app.UseSession(); //Sets up a session for us to use while we the site.
 
             app.UseRouting(); //Route the info a certain way
 
@@ -72,25 +85,26 @@ namespace Assignment5Webpage
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("categorypage",
-                    "{category}/{page:int}",
+                    "{category}/{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 endpoints.MapControllerRoute("page",
-                    "{page:int}",
+                    "{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 endpoints.MapControllerRoute("category",
                     "Books/{category}",
-                    new { Controller = "Home", action = "Index", page = 1 });
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
 
                 //Change the page number URL to be /P1 /P2 /P3
                 endpoints.MapControllerRoute("pagination",
-                    "P{page}",
+                    "P{pageNum}",
                     new { Controller = "Home", action = "Index" });
 
                 //Default endpoint - index
                 endpoints.MapDefaultControllerRoute();
 
+                endpoints.MapRazorPages();
             }
 
             );
